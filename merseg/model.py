@@ -152,7 +152,7 @@ def update_params(beta, log_like, state, opts, iters=1):
 
     for i in range(iters):
         if i % 10 == 0:
-            print(i, state.num_objects)
+            print(f'iteration {i}: detected {state.num_objects} nuclei')
             show_img(state)
 
         if opts.sample:

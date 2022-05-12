@@ -83,18 +83,18 @@ if __name__ == "__main__":
     
     s_p_nuclei = ShapePriors(30, 90, 30, 80)
     
-    main(filename, s_p, iters=100)
+    #main(filename, s_p, iters=500)
 
     # main(filename_nuclei, s_p_nuclei, iters=100)
 
-    # main(filename, s_p, iters=100, opts=opts_mask_sample)
+    main(filename, s_p, iters=200, opts=opts_mask_sample)
 
-    import line_profiler
+    #import line_profiler
 
-    profiler = line_profiler.LineProfiler(
-        update_params,
-    )
+    #profiler = line_profiler.LineProfiler(
+    #    update_params,
+    #)
 
-    profiler.run("main(filename, s_p, iters=100)")
+    #profiler.run("main(filename, s_p, iters=100)")
 
-    profiler.print_stats()
+    #profiler.print_stats()
