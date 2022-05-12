@@ -13,6 +13,7 @@ def draw_ellipse_overlay_synthetic(objs, image, name="overlay.TIFF"):
                                            shape=image.shape)
         image[row, col] = [0, 125, 0]
 
+    print(len(objs))
     skio.imsave(os.path.join(os.getcwd(), 'output', name), image, check_contrast = False)
 
 
@@ -41,10 +42,10 @@ class ProcessImage(object):
 
         for i in range(len(pxls)):
             if pxls[i] > self.threshold_val:
-                fore_probs[i] = np.log(front_bins[int(pxls[i])])
+                fore_probs[i] = np.log(front_bins[int(pxls[i])] + np.finfo(np.float32).eps)
                 back_probs[i] = 0
             else:
-                back_probs[i] = np.log(back_bins[int(pxls[i])])
+                back_probs[i] = np.log(back_bins[int(pxls[i])] + np.finfo(np.float32).eps)
                 fore_probs[i] = 0
 
         fore_probs.resize((X, Y))
@@ -60,7 +61,7 @@ class ProcessImage(object):
         val, binary = cv2.threshold(self.img_greyscale, self.threshold_val, 1, cv2.THRESH_BINARY)
         return binary
 
-    def draw_ellipse_overlay(self, objs, name="overlay.png", image=None):
+    def draw_ellipse_overlay(self, objs, name="overlay.TIFF", image=None):
         if not image:
             image = self.image_RGB
         for o in objs:
@@ -69,8 +70,10 @@ class ProcessImage(object):
                                                shape=image.shape)
             image[row, col] = [0, 125, 0]
 
-        plt.imshow(image)
-        plt.imsave(name, image)
+        print(len(objs))
+        
+        skio.imsave(os.path.join(os.getcwd(), 'output', name), image, check_contrast = False)
+
 
     def _read_in_img(self, fn):
         image = cv2.imread(fn)

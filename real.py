@@ -73,13 +73,16 @@ if __name__ == "__main__":
 
     opts_mask_sample = SelectedOpts(True, True, 0.1, False, neighbourhood=1, mask_type=3)
 
-    filename = "./data/clahe_nuclei.jpg"
+    filename = os.path.join(os.getcwd(), 'data', 'clahe_nuclei.jpg')
+    
     # filename = "../data/merFISH_01_001_05 .TIFF"
     # filename_nuclei = "../data/dna-34.png"
     # filename = "../data/merFISH_01_003_07.TIFF"
 
     s_p = ShapePriors(25, 80, 25, 60)
+    
     s_p_nuclei = ShapePriors(30, 90, 30, 80)
+    
     main(filename, s_p, iters=100)
 
     # main(filename_nuclei, s_p_nuclei, iters=100)
